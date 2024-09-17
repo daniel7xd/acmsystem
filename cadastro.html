@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Empréstimos</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <script>
+        if (!localStorage.getItem("loggedIn")) {
+            alert("Por favor, faça login para acessar esta página.");
+            window.location.href = "index.html";
+        }
+    </script>
+</head>
+<body>
+
+    <button id="consulta" style="border-radius: 20px; right: 80px;" onclick="direcionarconsulta()">
+        <i data-lucide="clipboard-check" id="icon-consulta" style="color: white;"></i>
+    </button>
+
+    <button id="sair" style="border-radius: 20px;" onclick="logout()">
+        <i data-lucide="log-out" id="icon-sair" style="color: white;"></i>
+    </button>
+
+    <form id="form-cadastro">
+
+        <div class="input-group">
+            <i data-lucide="user-round" id="icons"></i>
+            <label for="nome">Nome</label>
+        </div>
+        <input type="text" name="nome" id="nome" placeholder="Nome de quem pegou emprestado" required>
+
+        <div class="input-group">
+            <i data-lucide="phone" id="icons"></i>
+            <label for="telefone">Telefone</label>
+        </div>
+        <input type="text" name="telefone" id="telefone" placeholder="Contato de quem pegou emprestado" required>
+
+        <div class="input-group">
+            <i data-lucide="user-round-check" id="icons"></i>
+            <label for="responsavel">Responsável</label>
+        </div>
+        <input type="text" name="responsavel" id="responsavel" placeholder="Nome do responsável pelo empréstimo" required>
+
+        <div class="input-group">
+            <i data-lucide="file-text" id="icons"></i>
+            <label for="itens">Itens</label>
+        </div>
+        <textarea name="itens" id="itens" placeholder="Liste os itens que foram emprestados" required></textarea>
+
+        <button type="submit">Enviar</button>
+
+    </form>
+
+    <script src="main.js"></script>
+
+    <script>
+        $('#telefone').mask('(00) 00000-0000');
+
+        lucide.createIcons();
+
+        function direcionarconsulta() {
+            window.location.href = "https://docs.google.com/spreadsheets/d/1ToJqqtUJYnoK3KYHrHAzgztRCSpoNi_1YwRQQZv63Z0/edit?usp=drive_link";
+        }
+
+        function logout() {
+            localStorage.removeItem("loggedIn");
+            alert("Você saiu com sucesso.");
+            window.location.href = "index.html";
+        }
+        
+        const form = document.getElementById('form-cadastro');
+
+
+        form.addEventListener('submit', function(event) {
+
+        event.preventDefault();
+
+        limparform();
+        });
+
+        function limparform() {
+            alert('Formulário enviado com sucesso!');
+            document.getElementById('nome').value = "";
+            document.getElementById('telefone').value = "";
+            document.getElementById('responsavel').value = "";
+            document.getElementById('itens').value = "";
+        }
+    </script>
+</body>
+</html>
